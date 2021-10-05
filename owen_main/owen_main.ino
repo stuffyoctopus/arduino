@@ -66,4 +66,4 @@ void loop() {
   tempsensor.shutdown_wake(1); // shutdown MSP9808 - power consumption ~0.1 mikro Ampere, stops temperature sampling
   Serial.println("");
   delay(200);
-}d
+}

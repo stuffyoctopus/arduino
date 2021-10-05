@@ -14,12 +14,12 @@ products from Adafruit!
 
 // Create the MCP9808 temperature sensor object
 Adafruit_MCP9808 tempsensor = Adafruit_MCP9808();
-
 void setup() {
   Serial.begin(9600);
   while (!Serial); //waits for serial terminal to be open, necessary in newer arduino boards.
   Serial.println("MCP9808 demo");
-  
+  pinMode(8, OUTPUT);
+
   // Make sure the sensor is found, you can also pass in a different i2c
   // address with tempsensor.begin(0x19) for example, also can be left in blank for default address use
   // Also there is a table with all addres possible for this sensor, you can connect multiple sensors
@@ -61,9 +61,18 @@ void loop() {
   Serial.print(c, 4); Serial.print("*C\t and "); 
   Serial.print(f, 4); Serial.println("*F.");
   
-  delay(2000);
+  delay(200);
   Serial.println("Shutdown MCP9808.... ");
   tempsensor.shutdown_wake(1); // shutdown MSP9808 - power consumption ~0.1 mikro Ampere, stops temperature sampling
   Serial.println("");
   delay(200);
+
+  if (f > 80) {
+digitalWrite(8, HIGH);
+  } else {
+
+ digitalWrite(8, LOW);
 }
+    
+  
+} 

@@ -34,10 +34,11 @@ void setup() {
 void loop() {
   // Get the currently touched pads
   x = cap.touched();
-  if ( x > 0) {
+  for  (x = 1; x <= 16; x = x << 1)
+  {
     Serial.println(x);
   }
-x = 0;
+  x = 0;
   /*
     if (x > 0) {
     for (uint8_t i = 0; i < 12; i++) {
@@ -83,4 +84,4 @@ x = 0;
 }
 
 
-//for (x=1, x <= 16, x <<=) { 
+//for (x=1, x <= 16, x <<=) {

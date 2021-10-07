@@ -1,19 +1,4 @@
-/*********************************************************
-  This is a library for the MPR121 12-channel Capacitive touch sensor
 
-  Designed specifically to work with the MPR121 Breakout in the Adafruit shop
-  ----> https://www.adafruit.com/products/
-
-  These sensors use I2C communicate, at least 2 pins are required
-  to interface
-
-  Adafruit invests time and resources providing this open source code,
-  please support Adafruit and open-source hardware by purchasing
-  products from Adafruit!
-
-  Written by Limor Fried/Ladyada for Adafruit Industries.
-  BSD license, all text above must be included in any redistribution
-**********************************************************/
 
 #include <Wire.h>
 #include "Adafruit_MPR121.h"
@@ -33,9 +18,7 @@ uint16_t x = 0;
 void setup() {
   Serial.begin(9600);
 
-  while (!Serial) { // needed to keep leonardo/micro from starting too fast!
-    delay(10);
-  }
+
 
   Serial.println("Adafruit MPR121 Capacitive Touch sensor test");
 
@@ -51,8 +34,13 @@ void setup() {
 void loop() {
   // Get the currently touched pads
   x = cap.touched();
-  Serial.println(x);
-  for (uint8_t i = 0; i < 12; i++) {
+  if ( x > 0) {
+    Serial.println(x);
+  }
+x = 0;
+  /*
+    if (x > 0) {
+    for (uint8_t i = 0; i < 12; i++) {
     // it if *is* touched and *wasnt* touched before, alert!
     if ((x & _BV(i)) && !(lasttouched & _BV(i)) ) {
       Serial.print(i); Serial.println(" touched");
@@ -61,32 +49,38 @@ void loop() {
     if (!(x & _BV(i)) && (lasttouched & _BV(i)) ) {
       Serial.print(i); Serial.println(" released");
     }
-  }
+    }
+    } else {
 
-  // reset our state
-  lasttouched = x;
+    }
+    // reset our state
+    lasttouched = x;
 
-  // comment out this line for detailed data from the sensor!
-  return;
+    // comment out this line for detailed data from the sensor!
+    return;
 
-  // debugging info, what
-  Serial.print("\t\t\t\t\t\t\t\t\t\t\t\t\t 0x"); Serial.println(cap.touched(), HEX);
-  Serial.print("Filt: ");
-  for (uint8_t i = 0; i < 12; i++) {
+    // debugging info, what
+    Serial.print("\t\t\t\t\t\t\t\t\t\t\t\t\t 0x"); Serial.println(cap.touched(), HEX);
+    Serial.print("Filt: ");
+    for (uint8_t i = 0; i < 12; i++) {
     Serial.print(cap.filteredData(i)); Serial.print("\t");
-  }
-  Serial.println();
-  Serial.print("Base: ");
-  for (uint8_t i = 0; i < 12; i++) {
+    }
+    Serial.println();
+    Serial.print("Base: ");
+    for (uint8_t i = 0; i < 12; i++) {
     Serial.print(cap.baselineData(i)); Serial.print("\t");
-  }
-  Serial.println();
-  if (int x = 4) {
+    }
+    Serial.println();
+    if (int x = 4) {
     digitalWrite(8, HIGH);
-  } else {
+    } else {
     digitalWrite(8, LOW);
-  }
-  //if statement to turn on the light
-  // put a delay so it isn't overwhelming
+    }
+    //if statement to turn on the light
+    // put a delay so it isn't overwhelming
+  */
   delay(100);
 }
+
+
+//for (x=1, x <= 16, x <<=) { 
